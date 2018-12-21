@@ -1,0 +1,30 @@
+{{!-- set up file to have the template that handlebars can render onto --}}
+
+{{!-- create a button that will submit user input into the database --}}
+
+<h1>Hamburguesa!</h1>
+
+<ul>
+    {{#each burgers}}
+        {{#unless devoured}}
+            {{> burgers/burger-block devour=false}}
+        {{/unless}}
+    {{/each}}
+</ul>
+
+<h2>Add Yo Burger</h2>
+<form class="create-form">
+    <div class="form-group">
+        <label for="ca">Burger Name:</label>
+        <input type="text" id="ca" name="name">
+    </div>
+
+    <div class="form-group">
+        <label for="devoured">Devour it?</label><br>
+        <input type="radio" name="devoured" value="1" checked> Devoured!<br>
+        <input type="radio" name="sleepy" value="0">
+        Untouched!
+    </div>
+
+    <button type="submit">Burger Time!</button>
+</form>
