@@ -2,13 +2,74 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        {{!-- <link rel="stylesheet" href="/assets/css/style.css" type="text/css" /> --}}
-        <title>Eat My Burger!</title>
-        <script src="http://code.jquery.com/jquery.js"></script>
-    </head>
-    <body>
-        {{{ body }}}
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <title>Eat My Burger!</title>
+</head>
+
+<body>
+    <style>
+        body{
+            background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/1-tasty-burger-ellen-patton.jpg");
+            background-size: cover;
+            color: white;
+        }
+        .jumbotron{
+                background-color: rgba(233, 236, 239, 0%);
+                padding-top: 10px;
+        }
+        li {
+            list-style-type: none;
+            margin: 0 0 10px 0;
+        }
+        
+    </style>
+    {{{ body }}}
+</body>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script>
+    $(function(){
+        $("#change-devour").on("click", function(event){
+            var id = $(this).data("id");
+            var condition = $(this).data("devour");
+            var newDevour = { devour: condition };
+            $.ajax("/api/burgers/" + id, {
+                type: "PUT",
+                data: newDevour
+            }).then(
+                function(){
+                    location.reload();
+                };
+            );
+        });
+        $("#burger-time").on("click", function(event){
+            event.preventDefault();
+            var burger = $("#order-new-burger").val().trim();
+            var newBurger = { newBurger: burger};
+            $.ajax("/api/burgers/", {
+                type: "POST",
+                data: newBurger
+            }).then(
+                function(){
+                    location.reload();
+                };
+            );
+        });
+        $("#delete-burger").on("click", function(event){
+            var id = $(this).data("id");
+            $.ajax("/api/burgers/" + id, {
+                type: "DELETE"
+            }).then(
+                function(){
+                    location.reload();
+                };
+            );
+        });
+    });
+</script>
 </html>

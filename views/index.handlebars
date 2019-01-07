@@ -1,30 +1,37 @@
 {{!-- set up file to have the template that handlebars can render onto --}}
 
 {{!-- create a button that will submit user input into the database --}}
+<div class="container-fluid">
+    <div class="row justify-content-sm-center">
 
-<h1>Hamburguesa!</h1>
+        <div class="jumbotron">
+            <h3>Hamburguesa!</h3>
 
-<ul>
-    {{#each burgers}}
-        {{#unless devoured}}
-            {{> burgers/burger-block devour=false}}
-        {{/unless}}
-    {{/each}}
-</ul>
+            <ul>
+                {{#each burgers}}
+                {{#unless devoured}}
+                {{> burgers/burger-block devoured=true}}
+                {{/unless}}
+                {{/each}}
+            </ul>
 
-<h2>Add Yo Burger</h2>
-<form class="create-form">
-    <div class="form-group">
-        <label for="ca">Burger Name:</label>
-        <input type="text" id="ca" name="burger_name">
+            <h3>Noburguesa!</h3>
+            <ul>
+                {{#each burgers}}
+                {{#if devoured}}
+                {{> burgers/burger-block devour=false}}
+                {{/if}}
+                {{/each}}
+            </ul>
+
+            <h5>Addburguesa!</h5>
+            <form class="create-form">
+                <div class="form-group">
+                    <input type="text" id="order-new-burger" name="burger_name">
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="burger-time">Order!</button>
+            </form>
+        </div>
     </div>
-
-    {{!-- <div class="form-group">
-        <label for="devoured">Devour it?</label><br>
-        <input type="radio" name="devoured" value="1" checked> Devoured!</input>
-            <br>
-        
-    </div> --}}
-
-    <button type="submit">Burger Time!</button>
-</form>
+</div>
